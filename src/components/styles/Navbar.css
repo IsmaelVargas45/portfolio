@@ -1,0 +1,65 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box; /* Evita que el padding deforme el ancho */
+  z-index: 1000;          /* Hace que siempre quede por encima de todo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #0d1117; /* Mismo color oscuro de tu tema */
+  border-bottom: 1px solid #30363d;
+  
+  /* Transición suave para ocultar/mostrar */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Clases para controlar la visibilidad con el scroll */
+.navbar--visible {
+  transform: translateY(0);
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+/* Estilos de la marca y enlaces */
+.navbar-brand a {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-link {
+  color: #c9d1d9;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: #10b981;
+}
+
+.navbar-btn-contact {
+  border: 1px solid #10b981;
+  color: #10b981;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+}
+
+.navbar-btn-contact:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+}

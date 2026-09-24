@@ -1,0 +1,97 @@
+/* Footer.css */
+.footer {
+  background-color: #0d1117;;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* links a la izquierda, íconos a la derecha */
+  align-items: center;
+  flex-wrap: wrap; /* para que en móvil se acomode */
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: cyan;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social .icon img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1); /* convierte negro → blanco */
+  transition: transform 0.3s;
+}
+
+.footer-social .icon img:hover {
+  transform: scale(1.2);
+}
+
+
+.footer-form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.footer-form input {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  flex: 1;
+  max-width: 250px;
+}
+
+.footer-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: cyan;
+  color: #111;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.footer-form button:hover {
+  background-color: #00a0a0;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}

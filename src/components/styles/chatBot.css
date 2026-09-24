@@ -1,0 +1,241 @@
+/* ---------- Botón flotante (icono) ---------- */
+.chatbot-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #4f8cff;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: background 0.15s, transform 0.15s;
+}
+
+.chatbot-toggle:hover {
+  background: #3f7bf0;
+  transform: scale(1.06);
+}
+
+.chatbot-toggle:focus-visible,
+.chatbot-close:focus-visible,
+.chatbot-send:focus-visible,
+.chatbot input:focus-visible {
+  outline: 2px solid #9cc2ff;
+  outline-offset: 2px;
+}
+
+/* ---------- Panel del chat ---------- */
+.chatbot {
+  position: fixed;
+  right: 20px;
+  bottom: 88px; /* justo encima del icono */
+  z-index: 1000;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  padding: 16px;
+  border-radius: 16px;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+
+  /* Estado cerrado */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transform-origin: bottom right;
+  transition: opacity 0.2s, transform 0.2s, visibility 0s 0.2s;
+}
+
+/* Estado abierto */
+.chatbot.abierto {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity 0.2s, transform 0.2s, visibility 0s;
+}
+
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.chatbot-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.chatbot-close:hover {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+/* ---------- Zona de mensajes ---------- */
+.chatbox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: min(340px, calc(100vh - 260px));
+  min-height: 140px;
+  padding: 14px;
+  overflow-y: auto;
+  border-radius: 12px;
+  background: #1c1c1c;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+/* Mensaje de ayuda mientras no hay conversación */
+.chatbox:empty::before {
+  content: "Escribe un mensaje para empezar a chatear.";
+  margin: auto;
+  color: #777;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ---------- Burbujas ---------- */
+.chatbox p {
+  box-sizing: border-box;
+  max-width: 80%;
+  margin: 0;
+  padding: 9px 13px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  animation: aparecer 0.2s ease-out;
+}
+
+/* Las etiquetas "Tú:" y "Bot:" sobran: la posición ya indica quién habla */
+.chatbox p strong {
+  display: none;
+}
+
+.chatbox p.user {
+  align-self: flex-end;
+  border-radius: 16px 16px 4px 16px;
+  background: #4f8cff;
+  color: #fff;
+}
+
+.chatbox p.bot {
+  align-self: flex-start;
+  border-radius: 16px 16px 16px 4px;
+  background: #2c2c2c;
+  color: #eee;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Campo de texto y botón de enviar ---------- */
+.chatbot-form {
+  display: flex;
+  gap: 8px;
+}
+
+.chatbot input {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid #333;
+  border-radius: 999px;
+  background: #1c1c1c;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.chatbot input::placeholder {
+  color: #777;
+}
+
+.chatbot-send {
+  box-sizing: border-box;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #4f8cff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chatbot-send:hover:not(:disabled) {
+  background: #3f7bf0;
+}
+
+.chatbot input:disabled,
+.chatbot-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 480px) {
+  .chatbot-toggle {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .chatbot {
+    right: 12px;
+    bottom: 80px;
+    width: calc(100vw - 24px);
+    max-width: none;
+    padding: 12px;
+  }
+}
+
+/* ---------- Respeta a quien prefiere menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .chatbot,
+  .chatbot.abierto,
+  .chatbot-toggle {
+    transition: none;
+  }
+
+  .chatbox p {
+    animation: none;
+  }
+}

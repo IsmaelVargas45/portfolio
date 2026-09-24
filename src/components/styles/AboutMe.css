@@ -1,0 +1,30 @@
+.about-me {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  border-radius: 12px; /* Define bordes suaves que encajan con la sección de tecnologías */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-me__content {
+  max-width: 750px; /* Limita el ancho del texto para mejorar la lectura */
+  margin: 0 auto; /* Centra el bloque de texto dentro de la tarjeta */
+  text-align: center; /* Alineación central para conectar con la sección "Tecnologías" */
+}
+
+.about-me__title {
+  font-size: 2rem; /* Tamaño proporcional al título "Tecnologías" */
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #ffffff;
+}
+
+.about-me__text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #c9d1d9;
+  margin-bottom: 0; /* Quita el margen sobrante al final */
+}
