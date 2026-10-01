@@ -16,9 +16,7 @@ function Inicio() {
           <a href="#contacto" className="inicio-boton btn-principal">
             Dale vida a tu idea
           </a>
-          <a href="/cv.pdf" download className="inicio-boton btn-secundario">
-            Descargar CV
-          </a>
+
         </div>
       </div>
 
