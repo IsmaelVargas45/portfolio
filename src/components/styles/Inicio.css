@@ -1,11 +1,14 @@
+/* Mobile-first: los estilos base son los del celular.
+   El diseño de escritorio se agrega al final con min-width. */
+
 .inicio {
   display: flex;
+  flex-direction: column-reverse; /* móvil: imagen arriba, texto abajo */
   align-items: center;
-  justify-content: space-between;
-  max-width: 1100px;
+  text-align: center;
+  max-width: 68.75rem; /* antes 1100px */
   margin: 0 auto;
-  /* Cambiamos el padding superior de 4rem a 8rem para compensar el Navbar flotante */
-  padding: 8rem 2rem 4rem 2rem; 
+  padding: 2rem 1rem;
   gap: 2rem;
 }
 
@@ -14,47 +17,45 @@
 }
 
 .inicio-nombre {
-  
   font-family: 'Fira Code', Consolas, 'Courier New', monospace; /* Tipografía estilo código/computadora */
   font-size: 1.3rem; /* Tamaño más visible y proporcional */
   font-weight: 600;
-  color: #ffffff; /* Verde esmeralda */
-  background-color: rgba(16, 185, 129, 0.1); /* Fondo sutil estilo consola */
+  color: var(--text-strong);
+  background-color: var(--accent-soft); /* Fondo sutil estilo consola */
   padding: 0.4rem 0.9rem;
-  border-radius: 6px;
+  border-radius: 0.375rem; /* antes 6px */
   border: 1px solid rgba(16, 185, 129, 0.2);
   display: inline-block;
   margin-bottom: 0.5rem;
-
- 
 }
 
 .inicio-titulo {
   font-size: 3rem;
   font-weight: 800;
-  color: #2dd4bf; /* Verde brillante */
+  color: var(--accent-2); /* Verde brillante */
   margin-bottom: 1rem;
   line-height: 1.1;
 }
 
 .inicio-descripcion {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 1.125rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 500px;
+  margin: 0 auto 2rem; /* móvil: centrada */
+  max-width: 31.25rem; /* antes 500px */
 }
 
 .inicio-acciones {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center; /* móvil: centrados */
 }
 
 /* Base de botones */
 .inicio-boton {
   padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* antes 8px */
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
@@ -64,25 +65,14 @@
 
 /* Botón Primario (Relleno) */
 .btn-principal {
-  background-color: #2dd4bf;
-  color: #0f172a;
-  border: 2px solid #2dd4bf;
+  background-color: var(--accent-2);
+  color: var(--on-accent);
+  border: 2px solid var(--accent-2);
 }
 
 .btn-principal:hover {
-  background-color: #14b8a6;
-  border-color: #14b8a6;
-}
-
-/* Botón Secundario (Outline/Borde) */
-.btn-secundario {
-  background-color: transparent;
-  color: #2dd4bf;
-  border: 2px solid #2dd4bf;
-}
-
-.btn-secundario:hover {
-  background-color: rgba(45, 212, 191, 0.1);
+  background-color: var(--accent-2-hover);
+  border-color: var(--accent-2-hover);
 }
 
 /* Imagen de Perfil */
@@ -91,32 +81,33 @@
 }
 
 .inicio-imagen {
-  width: 320px;
-  height: 320px;
+  width: 13.75rem; /* móvil, antes 220px */
+  height: 13.75rem;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid #ffffff;
+  border: 4px solid var(--text-strong);
 }
 
-/* Ajustes para dispositivos móviles */
-@media (max-width: 768px) {
+/* Escritorio: texto a la izquierda, imagen a la derecha */
+@media (min-width: 48rem) {
   .inicio {
-    flex-direction: column-reverse;
-    text-align: center;
-    padding: 2rem 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    /* 8rem arriba para compensar el Navbar flotante */
+    padding: 8rem 2rem 4rem 2rem;
   }
 
   .inicio-descripcion {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 0 2rem;
   }
 
   .inicio-acciones {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .inicio-imagen {
-    width: 220px;
-    height: 220px;
+    width: 20rem; /* antes 320px */
+    height: 20rem;
   }
 }

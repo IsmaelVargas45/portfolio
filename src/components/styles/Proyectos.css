@@ -1,38 +1,43 @@
 .proyectos {
   text-align: center;
-  padding: 40px 0;
+  padding: 2.5rem 0; /* antes 40px */
 }
 
 .proyectos h2 {
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem; /* antes 30px */
   font-size: 2rem;
 }
+
 .proyecto h3 {
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem; /* antes 15px */
   text-align: center;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-strong);
 }
-
-
 
 .proyectos-contenedor {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 60px;
+  gap: 2rem; /* base móvil; en escritorio crece (ver media query abajo) */
   flex-wrap: wrap;
-  max-width: 90%; /* ocupa casi todo el ancho */
+  max-width: 90%;
   margin: 0 auto;
 }
 
 .proyecto {
-  background-color: #0d1117;;
-  color: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  width: 400px; /* más ancho */
+  background-color: var(--bg-deep); /* ARREGLO: había un ";;" doble */
+  color: var(--text-strong);
+  border-radius: 0.75rem; /* antes 12px */
+  padding: 1.5rem; /* antes 25px */
+
+  /* ARREGLO (px fijos): antes "width: 400px", que en un celular de
+     360px de ancho se salía de la pantalla.
+     Ahora ocupa todo el ancho disponible pero nunca pasa de 25rem (400px). */
+  width: 100%;
+  max-width: 25rem;
+
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -45,12 +50,41 @@
 .proyecto img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-radius: 0.5rem; /* antes 8px */
+  margin-bottom: 0.625rem; /* antes 10px */
 }
 
 .proyecto p {
-  font-size: 15px;
-  color: #ccc;
+  font-size: 0.9375rem; /* antes 15px: ahora respeta el tamaño de letra del usuario */
+  color: var(--text-soft);
   line-height: 1.5;
+}
+
+.proyectos-nota {
+  max-width: 40rem;
+  margin: 2.5rem auto 0;
+  padding: 1rem 1.25rem;
+  border: 1px dashed var(--border);
+  border-radius: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Mobile-first: la versión de escritorio se agrega con min-width */
+@media (min-width: 40rem) {
+  .proyectos-contenedor {
+    gap: 3.75rem; /* antes 60px */
+  }
+}
+
+/* Accesibilidad: quien pidió menos movimiento no ve el zoom del hover */
+@media (prefers-reduced-motion: reduce) {
+  .proyecto {
+    transition: none;
+  }
+
+  .proyecto:hover {
+    transform: none;
+  }
 }

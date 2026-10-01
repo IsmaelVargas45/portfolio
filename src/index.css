@@ -1,13 +1,83 @@
+/* ---------- Variables de tema ----------
+   Para cambiar los colores del sitio, se edita SOLO este bloque. */
+:root {
+  /* Fondos */
+  --bg: #151c25; /* fondo de la página */
+  --bg-deep: #0d1117; /* navbar, footer y tarjetas oscuras */
+  --surface: #161b22; /* tarjetas elevadas */
+  --border: #30363d;
+
+  /* Texto */
+  --text-strong: #ffffff;
+  --text: #e6edf3;
+  --text-soft: #c9d1d9;
+  --text-muted: #9da7b3;
+
+  /* Acento principal (verde) */
+  --accent: #10b981;
+  --accent-hover: #34d399;
+  --accent-soft: rgba(16, 185, 129, 0.1);
+
+  /* Acento secundario (turquesa, usado en Inicio y Tecnologías) */
+  --accent-2: #2dd4bf;
+  --accent-2-hover: #14b8a6;
+
+  /* Texto sobre un fondo de acento */
+  --on-accent: #0d1117;
+
+  /* Chatbot (tiene su propia paleta azul).
+     Si querés unificarlo con el verde, cambiá estas dos líneas. */
+  --chat-accent: #4f8cff;
+  --chat-accent-hover: #3f7bf0;
+  --chat-focus: #9cc2ff;
+  --chat-bg: #111;
+  --chat-surface: #1c1c1c;
+  --chat-bubble-bot: #2c2c2c;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 body {
-  color:white;
+  color: var(--text-strong);
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
-  background-color:#151C25
+  background-color: var(--bg);
+}
+
+/* ---------- Texto solo para lectores de pantalla ----------
+   Va acá (y no en Contacto.css) porque lo usan Contacto y Footer. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Skip link: aparece al enfocarlo con Tab ---------- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
 }

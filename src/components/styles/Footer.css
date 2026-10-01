@@ -1,45 +1,33 @@
-/* Footer.css */
+/* Footer.css
+   Mobile-first: la base es la versión de celular (en columna, centrada).
+   Lo de escritorio se agrega al final con min-width. */
+
 .footer {
-  background-color: #0d1117;;
-  color: #fff;
-  padding: 30px 0;
+  background-color: var(--bg-deep); /* ARREGLO: había un ";;" doble */
+  color: var(--text-strong);
+  padding: 1.875rem 0; /* antes 30px */
 }
 
 .footer-content {
-  max-width: 1100px;
+  max-width: 68.75rem; /* antes 1100px */
   margin: 0 auto;
+  padding: 0 1rem; /* para que en móvil el texto no toque los bordes */
   display: flex;
-  justify-content: space-between; /* links a la izquierda, íconos a la derecha */
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap; /* para que en móvil se acomode */
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 20px;
-}
-
-.footer-links a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-links a:hover {
-  color: cyan;
+  text-align: center;
+  gap: 1.25rem; /* antes 20px */
 }
 
 .footer-social {
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 0.9375rem; /* antes 15px */
 }
 
 .footer-social .icon img {
-  width: 28px;
-  height: 28px;
+  width: 1.75rem; /* antes 28px */
+  height: 1.75rem;
   filter: brightness(0) invert(1); /* convierte negro → blanco */
   transition: transform 0.3s;
 }
@@ -48,50 +36,26 @@
   transform: scale(1.2);
 }
 
-
-.footer-form {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.footer-form input {
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  flex: 1;
-  max-width: 250px;
-}
-
-.footer-form button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  background-color: cyan;
-  color: #111;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.footer-form button:hover {
-  background-color: #00a0a0;
-}
-
-/* Responsivo para pantallas pequeñas */
-@media (max-width: 768px) {
+/* Escritorio: texto a la izquierda, íconos a la derecha */
+@media (min-width: 48rem) {
   .footer-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .footer-links {
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 
   .footer-social {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+}
+
+/* Quien pidió menos movimiento no ve el zoom de los íconos */
+@media (prefers-reduced-motion: reduce) {
+  .footer-social .icon img {
+    transition: none;
+  }
+
+  .footer-social .icon img:hover {
+    transform: none;
   }
 }

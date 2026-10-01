@@ -5,7 +5,7 @@
 
 .tecnologias__titulo {
   font-size: 2rem;
-  color: #ffffff;
+  color: var(--text-strong);
   margin-bottom: 2.5rem;
 }
 
@@ -15,28 +15,28 @@
   flex-wrap: wrap;
   justify-content: center; /* Soluciona el alineado hacia la izquierda */
   gap: 1.5rem;
-  max-width: 1000px;
+  max-width: 62.5rem; /* antes 1000px */
   margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
 .tecnologias__item {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 12px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem; /* antes 12px */
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 110px;
+  width: 6.875rem; /* antes 110px */
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .tecnologias__item:hover {
-  transform: translateY(-5px);
-  border-color: #2dd4bf; /* Resaltado al pasar el cursor */
+  transform: translateY(-0.3125rem); /* antes -5px */
+  border-color: var(--accent-2); /* Resaltado al pasar el cursor */
 }
 
 /* Fuerza a los SVGs oscuros a verse blancos */
@@ -47,8 +47,18 @@
 }
 
 .tecnologias__nombre {
-  color: #e2e8f0;
+  color: var(--text);
   font-size: 0.875rem;
   font-weight: 500;
 }
 
+/* Quien pidió menos movimiento no ve el salto del hover */
+@media (prefers-reduced-motion: reduce) {
+  .tecnologias__item {
+    transition: none;
+  }
+
+  .tecnologias__item:hover {
+    transform: none;
+  }
+}
