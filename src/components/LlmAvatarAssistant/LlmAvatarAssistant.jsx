@@ -32,6 +32,12 @@ const DEFAULT_CONFIG = {
 
 export { DEFAULT_CONFIG };
 
+// Verbos de navegación. Se prueba contra el texto SIN tildes, por eso no
+// llevan acentos (así "llévame", "andá", "muéstrame" también funcionan).
+const NAV = /\b(ir|ve|vamos|anda|llevame|lleva|mostrame|muestrame)\b/;
+
+const stripAccents = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
 export default function LlmAvatarAssistant({
   config = {},
   onScrollToSection,
@@ -97,7 +103,7 @@ export default function LlmAvatarAssistant({
   }, []);
 
   const performScroll = useCallback((section) => {
-    const ok = scrollToSection(section.id, { behavior: 'smooth', offset: 64 });
+    const ok = scrollToSection(section.id, { behavior: 'smooth', offset: 80 });
     if (onScrollToSection && ok) onScrollToSection(section);
   }, [onScrollToSection]);
 
@@ -108,20 +114,30 @@ export default function LlmAvatarAssistant({
   const ask = useCallback(async (text) => {
     const q = (text ?? input).trim();
     if (!q || busy) return;
+
+    // Atajo de navegación: funciona SIEMPRE, incluso con el modelo apagado.
+    const direct = findSectionReference(q, sectionsRef.current);
+    if (direct && NAV.test(stripAccents(q))) {
+      setInput('');
+      setError('');
+      setMessages((prev) => [
+        ...prev,
+        { id: `user-${nextIdRef.current++}`, role: 'user', text: q },
+        {
+          id: `assistant-${nextIdRef.current++}`,
+          role: 'assistant',
+          text: `Te llevo a ${direct.section.title}.`,
+          matchedSection: null,
+        },
+      ]);
+      performScroll(direct.section);
+      return;
+    }
+
     const client = clientRef.current;
     if (!client) {
-      const NAV = /^(ir|ve|vamos|anda|andá|llevame|llévame|mostrame|muéstrame)\b/i;
-const direct = findSectionReference(q, sectionsRef.current);
-if (NAV.test(q) && direct) {
-  setInput('');
-  setMessages((prev) => [
-    ...prev,
-    { id: `user-${nextIdRef.current++}`, role: 'user', text: q },
-    { id: `assistant-${nextIdRef.current++}`, role: 'assistant', text: `Te llevo a ${direct.section.title}.`, matchedSection: null },
-  ]);
-  performScroll(direct.section);
-  return;
-}
+      setError('El asistente no está configurado correctamente.');
+      return;
     }
 
     setError('');
@@ -139,12 +155,23 @@ if (NAV.test(q) && direct) {
     const pageContext = sectionsRef.current
       .map((s) => `- ${s.title} (id: ${s.id})${s.text ? `: ${s.text}` : ''}`)
       .join('\n');
+
+    // Memoria corta: últimos 6 mensajes reales (sin saludo ni errores)
+    const history = messages
+      .filter((m) => m.id !== 'greeting' && m.text && !m.isError)
+      .slice(-6)
+      .map((m) => ({
+        role: m.role === 'user' ? 'user' : 'assistant',
+        content: m.text,
+      }));
+
     const payload = [
       {
         role: 'system',
         content: cfg.systemPrompt
           + (pageContext ? `\n\nSecciones de la página:\n${pageContext}` : ''),
       },
+      ...history,
       { role: 'user', content: q },
     ];
 
@@ -162,18 +189,27 @@ if (NAV.test(q) && direct) {
       if (!full) updateAssistantMessage(assistantId, { text: '(respuesta vacía)' });
 
       const ref = findSectionReference(q, sectionsRef.current)
-  || findSectionReference(full, sectionsRef.current);
+        || findSectionReference(full, sectionsRef.current);
       if (ref) {
         updateAssistantMessage(assistantId, { matchedSection: ref.section });
         performScroll(ref.section);
       }
       if (onSend) onSend(q, full);
     } catch (err) {
-      setError(err?.message || 'No se pudo obtener respuesta del modelo.');
+      const msg = err?.message || '';
+      setError(
+        msg.includes('request failed')
+          ? 'No puedo conectar con el modelo. ¿Está encendido el servidor?'
+          : msg || 'No se pudo obtener respuesta del modelo.',
+      );
+      updateAssistantMessage(assistantId, {
+        text: 'Lo siento, no pude responder ahora.',
+        isError: true,
+      });
     } finally {
       setBusy(false);
     }
-  }, [input, busy, cfg, performScroll, updateAssistantMessage, onSend]);
+  }, [input, busy, cfg, messages, performScroll, updateAssistantMessage, onSend]);
 
   const submit = (e) => {
     if (e) e.preventDefault();
