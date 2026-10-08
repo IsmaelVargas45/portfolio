@@ -1,0 +1,51 @@
+/* src/components/HabilidadesBlandas.css */
+
+.skills-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: var(--bg);
+}
+
+.skills-section h2 {
+  font-size: 2rem;
+  color: var(--text-strong);
+  margin-bottom: 2rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background-color: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  width: 150px; /* más grande */
+  height: 150px; /* más grande */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.skill-card:hover {
+  background-color: var(--accent-soft);
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.skill-icon {
+  font-size: 2.5rem; /* ícono más grande */
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.skill-card p {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem; /* texto más legible */
+}
