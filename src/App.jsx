@@ -5,34 +5,46 @@ import Tecnologias from "./components/Tecnologias";
 import Proyectos from "./components/Proyectos";
 import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
-import ChatBot from "./components/chatBot";
+import HabilidadesBlandas from "./components/HabilidadesBlandas";
+import LlmAvatarAssistant from "./components/LlmAvatarAssistant";
+import SYSTEM_PROMPT from "./components/systemPrompt.txt?raw";
+// Fuera de App, así no se recrea en cada render
+const ASSISTANT_CONFIG = {
+  baseUrl: import.meta.env.VITE_API_URL ?? "http://localhost:8080/v1",
+  model: "default",
+  temperature: 0.2,
+  systemPrompt: SYSTEM_PROMPT,
+  sectionDiscovery: [
+    { id: "inicio", title: "Inicio" },
+    { id: "sobre-mi", title: "Sobre mí", aliases: ["estudios", "quién es", "ubicación"] },
+    { id: "tecnologias", title: "Tecnologías", aliases: ["stack", "herramientas", "lenguajes"] },
+    { id: "proyectos", title: "Proyectos", aliases: ["e-commerce", "gestor de tareas"] },
+    { id: "contacto", title: "Contacto", aliases: ["email", "correo", "escribirle"] },
+  ],
+};
 
 function App() {
   return (
     <>
-      {/* ARREGLO (🟡 skip link): primer elemento enfocable de la página.
-          Con Tab aparece, y con Enter salta directo al contenido. */}
       <a className="skip-link" href="#contenido">
         Saltar al contenido
       </a>
 
       <Navbar />
 
-      {/* id="contenido" es el destino del skip link.
-          tabIndex={-1} permite que reciba el foco al activar el enlace. */}
       <main id="contenido" tabIndex={-1}>
         <Inicio />
         <AboutMe />
         <Tecnologias />
+        <HabilidadesBlandas />
         <Proyectos />
-        <Contacto />
+        <Contacto/>
+        
       </main>
 
       <Footer />
 
-      {/* ARREGLO: el chat es un widget flotante, no contenido principal,
-          así que va fuera del <main>. */}
-      <ChatBot />
+      <LlmAvatarAssistant config={ASSISTANT_CONFIG} />
     </>
   );
 }
