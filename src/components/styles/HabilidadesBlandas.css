@@ -1,4 +1,4 @@
-/* src/components/HabilidadesBlandas.css */
+/* src/components/styles/HabilidadesBlandas.css */
 
 .skills-section {
   text-align: center;
@@ -17,16 +17,20 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
+  max-width: 68.75rem;
+  margin: 0 auto;
 }
 
 .skill-card {
   background-color: var(--bg-deep);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-2);
   border-radius: 0.75rem;
-  width: 150px; /* más grande */
-  height: 150px; /* más grande */
+  width: 12rem;
+  min-height: 5rem;
+  padding: 1rem 1.25rem;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -38,14 +42,18 @@
   box-shadow: 0 0 10px var(--accent);
 }
 
-.skill-icon {
-  font-size: 2.5rem; /* ícono más grande */
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-}
-
 .skill-card p {
+  margin: 0;
   color: var(--text);
   font-weight: 600;
-  font-size: 1rem; /* texto más legible */
+  font-size: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card {
+    transition: none;
+  }
+  .skill-card:hover {
+    transform: none;
+  }
 }
