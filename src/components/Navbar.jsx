@@ -34,7 +34,7 @@ function Navbar() {
       </div>
       <ul className="navbar-links">
         <li>
-          <a href="#about" className="navbar-link">Sobre Mí</a>
+          <a href="#sobre-mi" className="navbar-link">Sobre Mí</a>
         </li>
         <li>
           <a href="#proyectos" className="navbar-link">Proyectos</a>

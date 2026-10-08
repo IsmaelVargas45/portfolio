@@ -20,6 +20,7 @@ const ASSISTANT_CONFIG = {
     { id: "tecnologias", title: "Tecnologías", aliases: ["stack", "herramientas", "lenguajes"] },
     { id: "proyectos", title: "Proyectos", aliases: ["e-commerce", "gestor de tareas"] },
     { id: "contacto", title: "Contacto", aliases: ["email", "correo", "escribirle"] },
+    { id: "habilidades-blandas", title: "Habilidades blandas", aliases: ["soft skills", "habilidades"] },
   ],
 };
 
