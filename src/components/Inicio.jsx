@@ -7,7 +7,7 @@ function Inicio() {
     <section id="inicio" className="inicio">
       <div className="inicio-texto">
         <p className="inicio-nombre">👋 ¡Hola! Soy Ismael Vargas</p>
-        <h1 className="inicio-titulo">Desarrollador web</h1>
+        <h1 className="inicio-titulo">Software Engineer</h1>
         <p className="inicio-descripcion">
           Me especializo en crear experiencias de usuario inmersivas usando
           las últimas tecnologías y frameworks para dar vida a tu visión.
